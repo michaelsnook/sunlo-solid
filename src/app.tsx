@@ -2,6 +2,7 @@ import { Router } from '@solidjs/router'
 import { FileRoutes } from '@solidjs/start/router'
 import { ParentProps, PropsWithChildren, Suspense } from 'solid-js'
 import './app.css'
+import Sidebar from 'components/sidebar'
 
 export default function App() {
 	return (
@@ -16,7 +17,7 @@ export default function App() {
 function RootLayout(props: ParentProps) {
 	return (
 		<>
-			{/*<Sidebar />*/}
+			<Sidebar />
 			<div class="@container mx-auto w-full max-w-[1100px] px-[1%] py-20">
 				<Suspense>{props.children}</Suspense>
 			</div>

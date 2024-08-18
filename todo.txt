@@ -16,7 +16,7 @@
 - [x] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
     - and getting-started and /learn/new-language
     - and layouts for single-form, auth guard, and app width
-- [ ] 5. add sidebar
+- [x] 5. add sidebar with state / static menu
 
 
 - [ ] any: eslint(?)
