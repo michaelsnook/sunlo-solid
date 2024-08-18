@@ -6,7 +6,10 @@
     - prettier.config.cjs (matching the other preset config files)
 - [x] 3. supabase client, cli, types, env
   - [x] any: tsconfig, aliases
-- [ ] 3. add home page (and dependent assets)
+- [x] 3. add home page (and dependent assets)
+    - and tailwind-merge and clsx
+    - images, favicon
+    - some app config
 - [ ] 4. add login route, auth layout, auth page stubs
 - [ ] 4. set up tailwind, daisy, base layout, theme
 - [ ] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
