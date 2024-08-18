@@ -1,0 +1,35 @@
+- [x] 1. initial commit
+- [x] 2. initial install, link to deployment
+- [ ] 3. add types
+- [ ] 3. add home page (and dependent assets)
+- [ ] 4. add login route, auth layout, auth page stubs
+- [ ] 4. set up tailwind, daisy, base layout, theme
+- [ ] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
+- [ ] 5. add sidebar
+
+- [ ] any: add prettier
+- [ ] any: eslint, tsconfig, aliases
+
+- [ ] 1. add supabase client, make the login work
+- [ ] 1. add tanstack query, provider
+- [ ] 2. add profileQuery, and load `/learn` page
+- [ ] 2. add signout and deck menu to sidebar
+- [ ] 3. add auth state change listener, invalidate queries
+- [ ] 3. auth store/context/hook, protect user queries from loading empty data
+- [ ] 4. add deck detail page, language queries and deck queries
+- [ ] 4. preload the app data high up in the route tree
+
+- [ ] any: add toast for login logout
+- [ ] any: add Error and Loading states (consider suspense query?)
+- [ ] any: make login signout into mutations
+
+- [ ] 1. add new deck
+- [ ] 1. add translation
+- [ ] 2. add phrase with translation
+- [ ] 2. add card
+- [ ] 2. add card-phrase-translations
+- [ ] 2. add phrase relations
+- [ ] 3. add reviews interface
+- [ ] 4. add profile / update
+- [ ] 4. add getting-started
+- [ ] 4. add auth screens (password reset etc)
