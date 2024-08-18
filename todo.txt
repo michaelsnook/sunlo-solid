@@ -1,14 +1,22 @@
 - [x] 1. initial commit
 - [x] 2. initial install, link to deployment
-- [ ] 3. add types
+- [x] any: add prettier 
+    I wanted it before I started saving w semicolons and spaces
+    - .vscode/settings.json
+    - prettier.config.cjs (matching the other preset config files)
+- [ ] 3. supabase client, cli, types, env
 - [ ] 3. add home page (and dependent assets)
 - [ ] 4. add login route, auth layout, auth page stubs
 - [ ] 4. set up tailwind, daisy, base layout, theme
 - [ ] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
 - [ ] 5. add sidebar
 
-- [ ] any: add prettier
-- [ ] any: eslint, tsconfig, aliases
+
+- [ ] any: eslint(?)
+- [ ] any: tsconfig, aliases
+- [ ] any: husky pre-commit -- actually defer this till we slow down
+- [ ] any: tauri build
+
 
 - [ ] 1. add supabase client, make the login work
 - [ ] 1. add tanstack query, provider
