@@ -21,7 +21,8 @@
 
 - [ ] any: eslint(?)
 - [ ] any: husky pre-commit -- actually defer this till we slow down
-- [ ] any: tauri build
+- [x] any: tauri build
+- [ ] any: tauri iOS
 - [ ] any: add 404 and 500 pages
 
 
