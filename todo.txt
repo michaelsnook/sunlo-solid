@@ -13,7 +13,9 @@
 - [x] 4. add layout / flex / css / tailwind / daisy
 - [x] 4. add login route, auth layout, auth page stubs
 - [x] 4. set up tailwind, daisy, base layout, theme
-- [ ] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
+- [x] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
+    - and getting-started and /learn/new-language
+    - and layouts for single-form, auth guard, and app width
 - [ ] 5. add sidebar
 
 
