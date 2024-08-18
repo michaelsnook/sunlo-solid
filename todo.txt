@@ -11,8 +11,8 @@
     - images, favicon
     - some app config
 - [x] 4. add layout / flex / css / tailwind / daisy
-- [ ] 4. add login route, auth layout, auth page stubs
-- [ ] 4. set up tailwind, daisy, base layout, theme
+- [x] 4. add login route, auth layout, auth page stubs
+- [x] 4. set up tailwind, daisy, base layout, theme
 - [ ] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
 - [ ] 5. add sidebar
 
