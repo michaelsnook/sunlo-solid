@@ -4,7 +4,8 @@
     I wanted it before I started saving w semicolons and spaces
     - .vscode/settings.json
     - prettier.config.cjs (matching the other preset config files)
-- [ ] 3. supabase client, cli, types, env
+- [x] 3. supabase client, cli, types, env
+  - [x] any: tsconfig, aliases
 - [ ] 3. add home page (and dependent assets)
 - [ ] 4. add login route, auth layout, auth page stubs
 - [ ] 4. set up tailwind, daisy, base layout, theme
@@ -13,7 +14,6 @@
 
 
 - [ ] any: eslint(?)
-- [ ] any: tsconfig, aliases
 - [ ] any: husky pre-commit -- actually defer this till we slow down
 - [ ] any: tauri build
 

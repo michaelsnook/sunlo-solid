@@ -14,6 +14,9 @@ importers:
       '@solidjs/start':
         specifier: ^1.0.6
         version: 1.0.6(rollup@4.20.0)(solid-js@1.8.21)(vinxi@0.4.1(@types/node@22.4.0)(ioredis@5.4.1)(terser@5.31.6))(vite@5.4.1(@types/node@22.4.0)(terser@5.31.6))
+      '@supabase/supabase-js':
+        specifier: ^2.45.1
+        version: 2.45.1
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.20(postcss@8.4.41)
@@ -30,9 +33,6 @@ importers:
         specifier: ^0.4.1
         version: 0.4.1(@types/node@22.4.0)(ioredis@5.4.1)(terser@5.31.6)
     devDependencies:
-      '@supabase/supabase-js':
-        specifier: ^2.45.1
-        version: 2.45.1
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
