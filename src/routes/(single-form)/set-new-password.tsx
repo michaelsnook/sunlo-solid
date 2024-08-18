@@ -1,3 +1,3 @@
 export default function SetNewPasswordPage() {
-	return <></>
+	return <>set new password</>
 }

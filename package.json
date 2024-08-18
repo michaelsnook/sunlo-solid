@@ -4,6 +4,7 @@
 	"scripts": {
 		"dev": "vinxi dev",
 		"build": "vinxi build",
+		"preview": "node .output/server/index.mjs",
 		"start": "vinxi start",
 		"types": "supabase gen types typescript --project-id hepudeougzlgnuqvybrj > ./src/lib/types/supabase.ts",
 		"format": "prettier --write .",
@@ -20,7 +21,6 @@
 	"engines": {
 		"node": ">=18"
 	},
-	"packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
 	"devDependencies": {
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/forms": "^0.5.7",
@@ -35,5 +35,6 @@
 		"vinxi": "^0.4.1",
 		"vite-plugin-solid": "^2.10.2",
 		"vite-tsconfig-paths": "^5.0.1"
-	}
+	},
+	"packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }

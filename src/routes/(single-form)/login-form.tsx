@@ -1,5 +1,3 @@
-'use client'
-
 import { A } from '@solidjs/router'
 // import supabase from 'lib/supabase-client'
 import { cn } from 'lib/utils'
