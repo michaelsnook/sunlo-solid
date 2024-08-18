@@ -1,6 +1,6 @@
 - [x] 1. initial commit
 - [x] 2. initial install, link to deployment
-- [x] any: add prettier 
+- [x] any: add prettier
     I wanted it before I started saving w semicolons and spaces
     - .vscode/settings.json
     - prettier.config.cjs (matching the other preset config files)
@@ -10,6 +10,7 @@
     - and tailwind-merge and clsx
     - images, favicon
     - some app config
+- [x] 4. add layout / flex / css / tailwind / daisy
 - [ ] 4. add login route, auth layout, auth page stubs
 - [ ] 4. set up tailwind, daisy, base layout, theme
 - [ ] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
@@ -19,6 +20,7 @@
 - [ ] any: eslint(?)
 - [ ] any: husky pre-commit -- actually defer this till we slow down
 - [ ] any: tauri build
+- [ ] any: add 404 and 500 pages
 
 
 - [ ] 1. add supabase client, make the login work

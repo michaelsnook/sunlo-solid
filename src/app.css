@@ -2,19 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background-rgb: 214, 219, 220;
-  --foreground-rgb: 0, 0, 0;
+@layer base {
+	:root {
+		--rounded-box: 0.5rem; /* border-radius for cards and other big elements */
+		--rounded-btn: 0.2rem; /* border-radius for buttons and similar elements */
+		--rounded-badge: 0.5rem; /* border-radius for badge and other small elements */
+		--animation-btn: 0; /* bounce animation time for button */
+		--animation-input: 0.2s; /* bounce animation time for checkbox, toggle, etc */
+		--padding-card: 2rem; /* default card-body padding */
+		--btn-text-case: none; /* default text case for buttons */
+		--navbar-padding: 0.5rem; /* default padding for navbar */
+		--border-btn: 1px; /* default border size for button */
+		--btn-focus-scale: 0.5;
+
+		/*
+    font-family: Chalkboard, comic sans ms, sanssecondaryerif;
+    --border-color:var(--b3);
+    --btn-focus-scale:0.95;
+    --tab-border:1px;
+    --tab-radius:0.5rem;
+    */
+	}
+	body,
+	#sidebar-all nav {
+		padding-top: env(safe-area-inset-top);
+		padding-bottom: env(safe-area-inset-bottom);
+	}
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-rgb: 0, 0, 0;
-    --foreground-rgb: 255, 255, 255;
-  }
+@layer components {
+	.w-app {
+		@apply mx-auto w-full max-w-[40rem]; /* outline outline-dashed outline-white/50; */
+	}
+	.s-link {
+		@apply link decoration-base-content/50 hover:decoration-base-content cursor-pointer;
+	}
+	.nav-link {
+		@apply transition-all;
+	}
+	.nav-link:not(.active) {
+		@apply hover:border-primary cursor-pointer hover:border-l-4 hover:pl-2;
+	}
+	.nav-link.active {
+		@apply disabled border-base-content/50 text-base-content/70 border-l-4 pl-2;
+	}
+	.card-white {
+		@apply card card-body bg-base-100 text-base-content;
+	}
+	/* used for a whole page */
+	.page-card {
+		@apply card-white;
+	}
+	.page-card > .h1,
+	.page-card > .h2 {
+		@apply text-base-content/90;
+	}
+	.s-input {
+		@apply bg-base-100 text-base-content w-full rounded px-3 ring-1;
+	}
 }
-
-body {
-  background: rgb(var(--background-rgb));
-  color: rgb(var(--foreground-rgb));
+@layer utilities {
+	.h1 {
+		@apply my-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl; /* font-display;*/
+	}
+	.h1 .sub {
+		@apply text-lg sm:text-xl md:text-2xl;
+	}
+	.d1 {
+		@apply my-4 text-4xl sm:text-5xl md:text-6xl lg:text-8xl; /* font-display;*/
+	}
+	.h2 {
+		@apply my-4 text-2xl md:text-3xl lg:text-4xl; /* font-display;*/
+	}
+	.d2 {
+		@apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl; /* font-display;*/
+	}
+	.h3 {
+		@apply mb-3 mt-1 text-xl md:text-2xl; /* font-display;*/
+	}
+	.h3 > p {
+		@apply text-sm opacity-80 md:text-base;
+	}
+	.h4 {
+		@apply my-2 text-lg md:text-xl; /* font-display;*/
+	}
+	.h5 {
+		@apply my-2 text-lg font-bold;
+	}
+	.px-min {
+		@apply px-2 sm:px-3 md:px-4 lg:px-6;
+	}
 }
