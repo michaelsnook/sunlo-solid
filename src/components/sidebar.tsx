@@ -1,4 +1,4 @@
-import { Accessor, createSignal } from 'solid-js'
+import { Accessor, createSignal, For, Show } from 'solid-js'
 import { A } from '@solidjs/router'
 import { Garlic } from 'components/garlic'
 // import languages from 'lib/languages'
@@ -58,11 +58,13 @@ const GenericMenu = ({ menu }: { menu: MenuType }) => {
 				{menu.href ? <Navlink href={menu.href} name={menu.name} /> : menu.name}
 			</p>
 			<ul class="flex flex-col gap-2">
-				{menu.links?.map((i: LinkType) => (
-					<li>
-						<Navlink href={i.href} name={i.name} />
-					</li>
-				))}
+				<For each={menu.links}>
+					{(item: LinkType) => (
+						<li>
+							<Navlink href={item.href} name={item.name} />
+						</li>
+					)}
+				</For>
 			</ul>
 		</div>
 	)
@@ -88,21 +90,15 @@ const DeckMenu = () => {
 */
 
 export default function Sidebar() {
-	// const { isAuth } = useAuth()
 	const [isOpen, setIsOpen] = createSignal(false)
-
+	// const { isAuth } = useAuth()
 	const isAuth = true
 
-	// const [isOpen, setIsOpen] = useState(false)
 	const toggle = () => setIsOpen(() => !isOpen())
-	const close = () => setIsOpen(() => false)
 	// const pathname = usePathname()
 	// const router = useRouter()
 
 	const username = 'lermie' // useProfile()?.data?.username
-
-	// close the sidebar when the user navigates
-	/* not anymore */
 
 	return (
 		<div id="sidebar-all">
@@ -126,7 +122,7 @@ export default function Sidebar() {
 					<Garlic size={50} />
 					Sunlo
 				</span>
-				{username ? (
+				<Show when={username}>
 					<>
 						<Navlink href="/profile">
 							<p class="flex flex-row gap-2">
@@ -136,11 +132,10 @@ export default function Sidebar() {
 
 						{/*<DeckMenu />*/}
 					</>
-				) : null}
+				</Show>
 
 				<GenericMenu menu={staticMenuData} />
-
-				{isAuth && (
+				<Show when={isAuth}>
 					<p>
 						<button
 							class="btn btn-ghost"
@@ -154,7 +149,7 @@ export default function Sidebar() {
 							Sign out
 						</button>
 					</p>
-				)}
+				</Show>
 			</nav>
 		</div>
 	)

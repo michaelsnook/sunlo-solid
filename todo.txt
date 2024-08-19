@@ -21,13 +21,13 @@
 
 - [ ] any: eslint(?)
 - [ ] any: husky pre-commit -- actually defer this till we slow down
-- [x] any: tauri build
+- [x] any: tauri build (not perfect but launches apple desktop app)
 - [ ] any: tauri iOS
 - [ ] any: add 404 and 500 pages
 
 
 - [x] 1. add supabase client, make the login work
-    - add form handler Felte
+    - add form handler Felte -- @@TODO review this decision?? kind of big...
 - [ ] 1. add tanstack query, provider
 - [ ] 2. add profileQuery, and load `/learn` page
 - [ ] 2. add signout and deck menu to sidebar
@@ -38,6 +38,7 @@
 
 - [ ] any: add toast for login logout
 - [ ] any: add Error and Loading states (consider suspense query?)
+    - https://docs.solidjs.com/concepts/control-flow/error-boundary
 - [ ] any: make login signout into mutations
 
 - [ ] 1. add new deck
