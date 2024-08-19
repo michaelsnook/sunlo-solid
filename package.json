@@ -11,6 +11,7 @@
 		"format:check": "prettier --check"
 	},
 	"dependencies": {
+		"@felte/solid": "^1.2.13",
 		"@solidjs/router": "^0.14.1",
 		"@solidjs/start": "^1.0.6",
 		"@supabase/supabase-js": "^2.45.1",

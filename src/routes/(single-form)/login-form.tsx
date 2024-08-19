@@ -1,19 +1,31 @@
 import { A } from '@solidjs/router'
-// import supabase from 'lib/supabase-client'
+import supabase from 'lib/supabase-client'
 import { cn } from 'lib/utils'
+import { createForm } from '@felte/solid'
+
+type LoginFormData = {
+	email: string
+	password: string
+}
 
 export function LoginForm() {
+	const { form } = createForm({
+		onSubmit: async (values: LoginFormData) => {
+			supabase.auth.signInWithPassword(values).then(res => {
+				console.log(`Signed in I guess?`, res)
+			})
+		},
+	})
+
 	const login = {
 		isPending: false,
 		error: null,
-		mutate: () => {
-			console.log(`Mutate!`)
-		},
 	}
+
 	return (
 		<>
 			<h1 class="h3 text-base-content/90">Please log in</h1>
-			<form role="form" onSubmit={login.mutate} class="form">
+			<form use:form role="form" class="form">
 				<fieldset class="flex flex-col gap-y-4" disabled={login.isPending}>
 					<div>
 						<label for="email">Email</label>

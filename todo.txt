@@ -26,7 +26,8 @@
 - [ ] any: add 404 and 500 pages
 
 
-- [ ] 1. add supabase client, make the login work
+- [x] 1. add supabase client, make the login work
+    - add form handler Felte
 - [ ] 1. add tanstack query, provider
 - [ ] 2. add profileQuery, and load `/learn` page
 - [ ] 2. add signout and deck menu to sidebar
