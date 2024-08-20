@@ -6,7 +6,7 @@ export type ProfileFull = ProfileMeta & {
 	deckLanguages: Array<lang>
 }
 
-export type DecksMap = {
+export type DecksMap = null | {
 	[key: lang]: DeckMeta
 }
 export type DeckMeta = Tables<'user_deck_plus'> & { lang: string }

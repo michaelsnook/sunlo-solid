@@ -12,8 +12,7 @@ async function fetchAndShapeProfileFull() {
 		.throwOnError()
 	if (!data) return null
 	const { decks_array, ...profile } = data
-	const decksMap: DecksMap =
-		mapArray<DeckMeta, 'lang'>(decks_array, 'lang') || null
+	const decksMap: DecksMap = mapArray<DeckMeta, 'lang'>(decks_array, 'lang')
 	// @ts-ignore
 	const deckLanguages: Array<lang> = decks_array.map(d => d.lang)
 	return { ...profile, decksMap, deckLanguages }

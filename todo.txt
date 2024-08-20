@@ -31,7 +31,8 @@
 - [x] 1. add tanstack query, provider
     - and add useProfile in the sidebar
     - and refetch upon login (but not (yet) with the authstate change listener)
-- [ ] 2. add profileQuery, and load `/learn` page
+    - [x] make the sidebar do reactiveness correctly (the solid way)
+- [x] 2. add profileQuery, and load `/learn` page
 - [x] 2. add signout and deck menu to sidebar
 - [ ] 3. add auth state change listener, invalidate queries
 - [ ] 3. auth store/context/hook, protect user queries from loading empty data
