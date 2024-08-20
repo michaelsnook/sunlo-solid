@@ -2,6 +2,7 @@ import { A } from '@solidjs/router'
 import supabase from 'lib/supabase-client'
 import { cn } from 'lib/utils'
 import { createForm } from '@felte/solid'
+import { useQueryClient } from '@tanstack/solid-query'
 
 type LoginFormData = {
 	email: string
@@ -9,10 +10,13 @@ type LoginFormData = {
 }
 
 export function LoginForm() {
+	const queryClient = useQueryClient()
+
 	const { form } = createForm({
 		onSubmit: async (values: LoginFormData) => {
 			supabase.auth.signInWithPassword(values).then(res => {
 				console.log(`Signed in I guess?`, res)
+				queryClient.invalidateQueries({ queryKey: ['user'] })
 			})
 		},
 	})

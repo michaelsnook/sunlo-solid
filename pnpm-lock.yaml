@@ -20,6 +20,12 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.45.1
         version: 2.45.1
+      '@tanstack/solid-query':
+        specifier: ^5.51.24
+        version: 5.51.24(solid-js@1.8.21)
+      '@tanstack/solid-query-devtools':
+        specifier: ^5.52.0
+        version: 5.52.0(@tanstack/solid-query@5.51.24(solid-js@1.8.21))(solid-js@1.8.21)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -840,6 +846,23 @@ packages:
     resolution: {integrity: sha512-ZvOCjUbsJBjL9CxQBn+VEnFpouzuKhxh2dH8xMIWHILL+HfOYtlAkWcyoon8LlzE53d2Yo6YO6pahKKNW3q1YQ==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
+
+  '@tanstack/query-core@5.51.24':
+    resolution: {integrity: sha512-qtIR0FMHUDIWyIQw87q4C+so7XaN59MsGfWrc6rgi2VTHrVZF3Hd0St2dbpqRetHf6XW5yY5lzTrXpTilPlxUg==}
+
+  '@tanstack/query-devtools@5.51.16':
+    resolution: {integrity: sha512-ajwuq4WnkNCMj/Hy3KR8d3RtZ6PSKc1dD2vs2T408MdjgKzQ3klVoL6zDgVO7X+5jlb5zfgcO3thh4ojPhfIaw==}
+
+  '@tanstack/solid-query-devtools@5.52.0':
+    resolution: {integrity: sha512-DiLQJ8XA4d7VhR6rtZfiZbAyMEtV99kLg0sIRlW698wRMNmjF2zOZqzpa8y87tqXS5XJOMPlHdige6vtdElVgg==}
+    peerDependencies:
+      '@tanstack/solid-query': ^5.52.0
+      solid-js: ^1.6.0
+
+  '@tanstack/solid-query@5.51.24':
+    resolution: {integrity: sha512-S8XHScgEMdq1o15KXahfHLprcHLQGcU7Ou78izv3bC/5Ttt/QNren2iNKaIdavqJRBZnKGmv+hjwlCdby8I6Ww==}
+    peerDependencies:
+      solid-js: ^1.6.0
 
   '@tauri-apps/cli-darwin-arm64@2.0.0-rc.4':
     resolution: {integrity: sha512-CSkGon9QAGymYhDng3GTiBuyrWAkqdGimL+3hzfAA4c0yMV87Y68IZ7mwzzbmRjweImvrhuNgw4ME94d1wnGPQ==}
@@ -3636,6 +3659,21 @@ snapshots:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.10
+
+  '@tanstack/query-core@5.51.24': {}
+
+  '@tanstack/query-devtools@5.51.16': {}
+
+  '@tanstack/solid-query-devtools@5.52.0(@tanstack/solid-query@5.51.24(solid-js@1.8.21))(solid-js@1.8.21)':
+    dependencies:
+      '@tanstack/query-devtools': 5.51.16
+      '@tanstack/solid-query': 5.51.24(solid-js@1.8.21)
+      solid-js: 1.8.21
+
+  '@tanstack/solid-query@5.51.24(solid-js@1.8.21)':
+    dependencies:
+      '@tanstack/query-core': 5.51.24
+      solid-js: 1.8.21
 
   '@tauri-apps/cli-darwin-arm64@2.0.0-rc.4':
     optional: true

@@ -28,9 +28,11 @@
 
 - [x] 1. add supabase client, make the login work
     - add form handler Felte -- @@TODO review this decision?? kind of big...
-- [ ] 1. add tanstack query, provider
+- [x] 1. add tanstack query, provider
+    - and add useProfile in the sidebar
+    - and refetch upon login (but not (yet) with the authstate change listener)
 - [ ] 2. add profileQuery, and load `/learn` page
-- [ ] 2. add signout and deck menu to sidebar
+- [x] 2. add signout and deck menu to sidebar
 - [ ] 3. add auth state change listener, invalidate queries
 - [ ] 3. auth store/context/hook, protect user queries from loading empty data
 - [ ] 4. add deck detail page, language queries and deck queries
@@ -40,6 +42,8 @@
 - [ ] any: add Error and Loading states (consider suspense query?)
     - https://docs.solidjs.com/concepts/control-flow/error-boundary
 - [ ] any: make login signout into mutations
+- [ ] any: replace react-modal
+- [ ] any: replace react-select
 
 - [ ] 1. add new deck
 - [ ] 1. add translation
@@ -51,3 +55,11 @@
 - [ ] 4. add profile / update
 - [ ] 4. add getting-started
 - [ ] 4. add auth screens (password reset etc)
+
+?? Send back to the other app(s) ??
+1. use a map for the languages. it's more type-appropriate and since it's loaded in memory app-wide
+    it doesn't matter
+1. use mapped object for decksMap on the Profile as well (it doesn't change enough to matter
+    whether this non-serializable object can benefit from the react-query optimizations
+1. research whether solid-query can maintain structural-sharing with Maps and Sets (consider using
+    for the CardsMap and PhrasesMap 🤷)

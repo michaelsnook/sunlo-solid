@@ -1,104 +1,48 @@
-import { Accessor, createSignal, For, Show } from 'solid-js'
-import { A } from '@solidjs/router'
-import { Garlic } from 'components/garlic'
-// import languages from 'lib/languages'
-// import { usePathname, useRouter } from 'next/navigation'
-// import { useProfile } from 'app/data/hooks'
-
+import { useQueryClient } from '@tanstack/solid-query'
 import supabase from 'lib/supabase-client'
-// import { toast } from 'react-hot-toast'
-// import { useAuth } from 'components/auth-context'
+import { For, createSignal, Show, Accessor } from 'solid-js'
+import { Garlic } from './garlic'
 import { cn } from 'lib/utils'
-import { JSXElement } from 'solid-js'
+import { A } from '@solidjs/router'
+import languages from 'lib/languages'
+import { lang } from 'types/main'
+import { useProfile } from 'lib/queries'
 
-// Don't keep using these. use the framework's types for links and routes
-type LinkType = {
-	href: string
-	children?: JSXElement
-	name?: string
-}
+type LinkType = { text: string; href: string }
 
-type MenuType = LinkType & {
-	links: Array<LinkType>
-}
-
-const Navlink = ({ href, children, name = '' }: LinkType) => {
-	// const pathname = usePathname()
-	const isActive = false // = href === pathname
-	return (
-		<A href={href} class={`nav-link ${isActive ? 'active' : ''}`}>
-			{children || name}
+const Navlink = ({ text, href }: LinkType) =>
+	!text ? null : (
+		<A href={href} class="nav-link">
+			{text}
 		</A>
 	)
-}
 
-const staticMenuData: MenuType = {
-	name: 'Menu',
-	href: '',
-	links: [
-		{
-			name: 'Home',
-			href: '/',
-		},
-		{
-			name: 'Log in or sign up',
-			href: '/login',
-		},
-		{
-			name: 'Browse Languages',
-			href: '/language',
-		},
-	],
-}
-
-const GenericMenu = ({ menu }: { menu: MenuType }) => {
-	return (
-		<div>
-			<p class="my-4 font-bold">
-				{menu.href ? <Navlink href={menu.href} name={menu.name} /> : menu.name}
-			</p>
-			<ul class="flex flex-col gap-2">
-				<For each={menu.links}>
-					{(item: LinkType) => (
-						<li>
-							<Navlink href={item.href} name={item.name} />
-						</li>
-					)}
-				</For>
-			</ul>
-		</div>
-	)
-}
-
-/*
-const DeckMenu = () => {
-	const { data } = useProfile()
-
-	const langs = data?.deckLanguages ?? []
-	const menuData = {
-		name: 'Learning decks',
-		href: '/home',
-		links: langs.map((lang: string) => {
-			return {
-				name: languages[lang],
-				href: `/home/${lang}`,
-			}
-		}),
-	}
-	return <GenericMenu menu={menuData} />
-}
-*/
+const staticMenuLinks: Array<LinkType> = [
+	{
+		text: 'Home',
+		href: '/',
+	},
+	{
+		text: 'Log in or sign up',
+		href: '/login',
+	},
+	{
+		text: 'Browse Languages',
+		href: '/language',
+	},
+	{
+		text: 'Privacy Policy',
+		href: '/privacy-policy',
+	},
+]
 
 export default function Sidebar() {
-	const [isOpen, setIsOpen] = createSignal(false)
-	// const { isAuth } = useAuth()
-	const isAuth = true
-
+	const queryClient = useQueryClient()
+	const query = useProfile()
+	const [isOpen, setIsOpen] = createSignal(true)
 	const toggle = () => setIsOpen(() => !isOpen())
-	// const pathname = usePathname()
-	// const router = useRouter()
 
-	const username = 'lermie' // useProfile()?.data?.username
+	const profile = () => query.data ?? null
 
 	return (
 		<div id="sidebar-all">
@@ -109,41 +53,68 @@ export default function Sidebar() {
 					isOpen() ? 'fixed' : 'hidden',
 					'bottom-0 left-0 right-0 top-0 md:hidden'
 				)}
-				// onClick={toggle}
+				onClick={toggle}
 			/>
 			<nav
+				id="main-menu"
 				aria-label="Main navigation"
 				class={cn(
 					isOpen() ? 'fixed md:sticky md:flex' : 'hidden',
-					'bg-base-300 text-base-content top-0 z-30 h-screen w-72 flex-col gap-4 overflow-y-auto overflow-x-hidden p-6'
+					'top-0 z-30 h-screen w-72 flex-col gap-4 overflow-y-auto overflow-x-hidden bg-base-300 p-6 text-base-content'
 				)}
 			>
 				<span class="h4 flex flex-row items-center">
 					<Garlic size={50} />
 					Sunlo
 				</span>
-				<Show when={username}>
-					<>
-						<Navlink href="/profile">
-							<p class="flex flex-row gap-2">
-								<ProfileIcon /> {username}
-							</p>
-						</Navlink>
 
-						{/*<DeckMenu />*/}
-					</>
+				<Show when={profile()}>
+					<A href="/profile" class="nav-link">
+						<p class="flex flex-row gap-2">
+							<ProfileIcon /> {profile()?.username}
+						</p>
+					</A>
+
+					<div>
+						<p class="my-4 font-bold">
+							<Navlink href="/learn" text="Your decks" />
+						</p>
+						<ul class="flex flex-col gap-2">
+							<For each={profile()?.deckLanguages}>
+								{(lang: lang) => (
+									<li>
+										<Navlink href={`/learn/${lang}`} text={languages[lang]} />
+									</li>
+								)}
+							</For>
+						</ul>
+					</div>
 				</Show>
 
-				<GenericMenu menu={staticMenuData} />
-				<Show when={isAuth}>
+				<div>
+					<p class="my-4 font-bold">Menu</p>
+					<ul class="flex flex-col gap-2">
+						<For each={staticMenuLinks}>
+							{({ href, text }) => (
+								<li>
+									<Navlink href={href} text={text} />
+								</li>
+							)}
+						</For>
+					</ul>
+				</div>
+
+				<Show when={!!query.data}>
 					<p>
 						<button
 							class="btn btn-ghost"
-							onClick={
-								() => supabase.auth.signOut() // .then(() => {
-								// toast(`You have logged out`)
-								// router?.push('/')
-								//})
+							onClick={() =>
+								supabase.auth.signOut().then(data => {
+									queryClient.resetQueries({ queryKey: ['user'] })
+									// console.log(`Signed out; congrats`, data)
+									// toast(`You have logged out`)
+									// router?.push('/')
+								})
 							}
 						>
 							Sign out
@@ -163,7 +134,7 @@ const SidebarOpener = ({
 	toggle: () => void
 }) => (
 	<button
-		class={`btn-outline btn-primary border-primary fixed bottom-4 left-3 z-50 rounded-full border bg-white p-2`}
+		class={`btn-outline btn-primary fixed bottom-4 left-3 z-50 rounded-full border border-primary bg-white p-2`}
 		role="button"
 		aria-haspopup={true}
 		aria-label="Toggle main menu"
