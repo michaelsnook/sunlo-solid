@@ -1,4 +1,5 @@
 import { Tables, TablesInsert } from './supabase'
+export type uuid = string
 export type lang = string // with length of 3
 
 export type ProfileFull = ProfileMeta & {

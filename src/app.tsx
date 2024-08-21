@@ -3,8 +3,9 @@ import { ParentProps, Suspense } from 'solid-js'
 import { FileRoutes } from '@solidjs/start/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query'
 import { SolidQueryDevtools } from '@tanstack/solid-query-devtools'
+import { Sidebar } from 'sidebar'
+import { AuthStateProvider } from 'auth-state-provider'
 import './app.css'
-import Sidebar from 'components/sidebar'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -14,12 +15,14 @@ const queryClient = new QueryClient({
 
 export default function App() {
 	return (
-		<QueryClientProvider client={queryClient}>
-			<Router root={RootLayout}>
-				<FileRoutes />
-			</Router>
-			<SolidQueryDevtools />
-		</QueryClientProvider>
+		<AuthStateProvider queryClient={queryClient}>
+			<QueryClientProvider client={queryClient}>
+				<Router root={RootLayout}>
+					<FileRoutes />
+				</Router>
+				<SolidQueryDevtools />
+			</QueryClientProvider>
+		</AuthStateProvider>
 	)
 }
 

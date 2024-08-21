@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/solid-query'
 import supabase from 'lib/supabase-client'
 import { For, createSignal, Show, Accessor } from 'solid-js'
-import { Garlic } from './garlic'
+import { Garlic } from './components/garlic'
 import { cn } from 'lib/utils'
 import { A } from '@solidjs/router'
 import languages from 'lib/languages'
@@ -36,7 +36,7 @@ const staticMenuLinks: Array<LinkType> = [
 	},
 ]
 
-export default function Sidebar() {
+export function Sidebar() {
 	const queryClient = useQueryClient()
 	const query = useProfile()
 	const [isOpen, setIsOpen] = createSignal(true)
@@ -108,14 +108,11 @@ export default function Sidebar() {
 					<p>
 						<button
 							class="btn btn-ghost"
-							onClick={() =>
-								supabase.auth.signOut().then(data => {
-									queryClient.resetQueries({ queryKey: ['user'] })
-									// console.log(`Signed out; congrats`, data)
-									// toast(`You have logged out`)
-									// router?.push('/')
-								})
-							}
+							onClick={() => {
+								supabase.auth.signOut()
+								// then toast successful signout
+								// maybe redirect
+							}}
 						>
 							Sign out
 						</button>
