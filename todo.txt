@@ -36,7 +36,7 @@
 - [x] 2. add signout and deck menu to sidebar
     - and added query invalidation/reset
 - [x] 3. add auth state change listener, invalidate queries
-- [ ] 3. auth store/context/hook, protect user queries from loading empty data
+- [x] 3. auth store/context/hook, protect user queries from loading empty data
 - [ ] 4. add deck detail page, language queries and deck queries
 - [ ] 4. preload the app data high up in the route tree
 

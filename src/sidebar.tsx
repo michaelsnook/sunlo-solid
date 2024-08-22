@@ -1,4 +1,3 @@
-import { useQueryClient } from '@tanstack/solid-query'
 import supabase from 'lib/supabase-client'
 import { For, createSignal, Show, Accessor } from 'solid-js'
 import { Garlic } from './components/garlic'
@@ -7,6 +6,7 @@ import { A } from '@solidjs/router'
 import languages from 'lib/languages'
 import { lang } from 'types/main'
 import { useProfile } from 'lib/queries'
+import { useAuth } from 'auth-state-provider'
 
 type LinkType = { text: string; href: string }
 
@@ -37,7 +37,7 @@ const staticMenuLinks: Array<LinkType> = [
 ]
 
 export function Sidebar() {
-	const queryClient = useQueryClient()
+	const { isAuth } = useAuth()
 	const query = useProfile()
 	const [isOpen, setIsOpen] = createSignal(true)
 	const toggle = () => setIsOpen(() => !isOpen())

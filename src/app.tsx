@@ -31,7 +31,7 @@ function RootLayout(props: ParentProps) {
 		<div class="flex min-h-screen flex-row bg-[hsl(210,100,15)] text-white">
 			<Suspense>
 				<Sidebar />
-				<div class="@container mx-auto w-full max-w-[1100px] px-[1%] py-20">
+				<div class="mx-auto w-full max-w-[1100px] px-[1%] py-20 @container">
 					{props.children}
 				</div>
 			</Suspense>

@@ -3,6 +3,7 @@ import { createQuery, CreateQueryResult } from '@tanstack/solid-query'
 import { DeckMeta, DecksMap, lang, ProfileFull } from 'types/main'
 import supabase from './supabase-client'
 import { mapArray } from './utils'
+import { useAuth } from 'auth-state-provider'
 
 async function fetchAndShapeProfileFull() {
 	const { data } = await supabase
@@ -19,9 +20,10 @@ async function fetchAndShapeProfileFull() {
 }
 
 export function useProfile() {
+	const { isAuth } = useAuth()
 	return createQuery(() => ({
 		queryKey: ['user', 'profile'],
 		queryFn: fetchAndShapeProfileFull,
-		// enabled: !!userId,
+		enabled: isAuth(),
 	})) as CreateQueryResult<ProfileFull, PostgrestError>
 }

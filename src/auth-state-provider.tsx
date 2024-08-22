@@ -1,58 +1,86 @@
-import { createSignal, JSXElement, onMount } from 'solid-js'
+import type { uuid } from 'types/main'
+import type { QueryClient } from '@tanstack/solid-query'
+import type { Session } from '@supabase/supabase-js'
+import {
+	createContext,
+	createMemo,
+	JSXElement,
+	onMount,
+	useContext,
+} from 'solid-js'
+// import { createStore } from 'solid-js/store'
 import supabase from 'lib/supabase-client'
-import { uuid } from 'types/main'
-import { QueryClient } from '@tanstack/solid-query'
+import { createStore } from 'solid-js/store'
 
-type AuthState = {
-  isAuth: boolean
-  userId: uuid | undefined
-  userEmail: string | undefined
-  isPending: boolean
+// Define the shape of our session
+type SessionUser = {
+	email: string
+	id: uuid
+	role: string
 }
 
-const blankAuth: AuthState = {
-  isAuth: false,
-  userId: '',
-  userEmail: '',
-  isPending: true,
+// Define the shape of our context
+type AuthContextValue = {
+	isAuth: () => boolean
+	getUid: () => string
+	getEmail: () => string
+	// setSession: (session: Session) => void;
 }
 
-// right now it's not doing context-provider, just attaching the listener, and
-// tracking state (locally; there is no useAuthContext implemented here).
-export const AuthStateProvider = ({
-	queryClient,
-	children,
-}: {
+export const AuthContext = createContext<AuthContextValue>()
+
+export const AuthStateProvider = (props: {
 	queryClient: QueryClient
 	children: JSXElement
 }) => {
-	const [auth, setAuth] = createSignal(blankAuth)
+	const [user, setUser] = createStore<SessionUser>({
+		email: '',
+		id: '',
+		role: '',
+	})
+
 	onMount(() => {
 		const { data: listener } = supabase.auth.onAuthStateChange(
-			(event, session) => {
-				// if it's a logout or null user, we should remove user data from cache
-				if (event === 'SIGNED_OUT' || typeof session?.user !== 'object') {
-					queryClient.resetQueries({ queryKey: ['user'] })
-				} else {
-					const authNew = {
-						isAuth: session?.user.role === 'authenticated',
-						userId: session?.user.id,
-						userEmail: session?.user.email,
-						isPending: false,
-					}
-					// Perhaps add a shouldUpdate check?
-					// But most components will only subscribe to 1 or 2 fields
-					setAuth(authNew)
-					// if for some reason the new user is a different user, remvoe cache
-					if (session?.user.id !== auth().userId) {
-						queryClient.resetQueries({ queryKey: ['user'] })
-					}
+			(event: string, session: Session | null) => {
+				const newUser = {
+					email: session?.user?.email || '',
+					id: session?.user.id || '',
+					role: session?.user.role || '',
 				}
+				setUser(newUser)
+				// uncache user data when it's a sign out, no user, not auth'd, different user
+				if (
+					event === 'SIGNED_OUT' ||
+					session?.user.role !== 'authenticated' ||
+					session.user.id !== user.id
+				) {
+					props.queryClient.resetQueries({ queryKey: ['user'] })
+				}
+				console.log(`Finished callback for "${event}"`, newUser)
 			}
 		)
 		return () => {
 			listener.subscription.unsubscribe()
 		}
 	})
-	return children
+	return (
+		<AuthContext.Provider
+			value={{
+				isAuth: createMemo(() => user.role === 'authenticated'),
+				getUid: createMemo(() => user.id ?? ''),
+				getEmail: createMemo(() => user.email ?? ''),
+				// setSession: (newSession) => setSession(newSession),
+			}}
+		>
+			{props.children}
+		</AuthContext.Provider>
+	)
+}
+
+export function useAuth() {
+	const context = useContext<AuthContextValue | undefined>(AuthContext)
+	if (context === undefined) {
+		throw new Error('useAuthContext: undefined AuthContext')
+	}
+	return context
 }
