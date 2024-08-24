@@ -15,8 +15,7 @@ export function LoginForm() {
 	const { form } = createForm({
 		onSubmit: async (values: LoginFormData) => {
 			supabase.auth.signInWithPassword(values).then(res => {
-				console.log(`Signed in I guess?`, res)
-				queryClient.invalidateQueries({ queryKey: ['user'] })
+				if (res.error) console.log(`Failed to sign in`, res.error)
 			})
 		},
 	})

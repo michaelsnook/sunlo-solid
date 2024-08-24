@@ -2,17 +2,19 @@ import type { uuid } from 'types/main'
 import type { QueryClient } from '@tanstack/solid-query'
 import type { Session } from '@supabase/supabase-js'
 import {
+	type JSXElement,
+	batch,
 	createContext,
 	createMemo,
-	JSXElement,
+	onCleanup,
 	onMount,
 	useContext,
 } from 'solid-js'
-// import { createStore } from 'solid-js/store'
-import supabase from 'lib/supabase-client'
 import { createStore } from 'solid-js/store'
+import supabase from 'lib/supabase-client'
 
-// Define the shape of our session
+// Define the shape of the data store itself
+// This is just a subset of fields on supabase's session.user
 type SessionUser = {
 	email: string
 	id: uuid
@@ -20,11 +22,11 @@ type SessionUser = {
 }
 
 // Define the shape of our context
+// Note: we don't export the setter bc it all happens right here
 type AuthContextValue = {
 	isAuth: () => boolean
 	getUid: () => string
 	getEmail: () => string
-	// setSession: (session: Session) => void;
 }
 
 export const AuthContext = createContext<AuthContextValue>()
@@ -59,10 +61,11 @@ export const AuthStateProvider = (props: {
 				console.log(`Finished callback for "${event}"`, newUser)
 			}
 		)
-		return () => {
+		onCleanup(() => {
 			listener.subscription.unsubscribe()
-		}
+		})
 	})
+
 	return (
 		<AuthContext.Provider
 			value={{
