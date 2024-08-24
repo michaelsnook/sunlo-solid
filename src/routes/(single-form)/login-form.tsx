@@ -16,8 +16,11 @@ export function LoginForm() {
 	const { form } = createForm({
 		onSubmit: async (values: LoginFormData) => {
 			supabase.auth.signInWithPassword(values).then(response => {
-				if (response.error) console.log(`Failed to sign in`, response.error)
-				else toast.success('Logged in')
+				if (response.error) {
+					console.log(`Failed to sign in`, response.error)
+					toast.error('Error signing in')
+					throw response.error
+				} else toast.success('Logged in')
 			})
 		},
 	})

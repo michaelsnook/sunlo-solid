@@ -5,7 +5,6 @@ import {
 	type JSXElement,
 	batch,
 	createContext,
-	createMemo,
 	onCleanup,
 	onMount,
 	useContext,
@@ -19,7 +18,7 @@ type SessionUser = {
 	email: string
 	id: uuid
 	role: string
-}
+} | null
 
 // Define the shape of our context
 // Note: we don't export the setter bc it all happens right here
@@ -35,30 +34,34 @@ export const AuthStateProvider = (props: {
 	queryClient: QueryClient
 	children: JSXElement
 }) => {
-	const [user, setUser] = createStore<SessionUser>({
-		email: '',
-		id: '',
-		role: '',
-	})
+	const [user, setUser] = createStore<SessionUser>(null)
 
 	onMount(() => {
 		const { data: listener } = supabase.auth.onAuthStateChange(
 			(event: string, session: Session | null) => {
-				const newUser = {
-					email: session?.user?.email || '',
-					id: session?.user.id || '',
-					role: session?.user.role || '',
-				}
-				setUser(newUser)
-				// uncache user data when it's a sign out, no user, not auth'd, different user
-				if (
-					event === 'SIGNED_OUT' ||
-					session?.user.role !== 'authenticated' ||
-					session.user.id !== user.id
-				) {
-					props.queryClient.resetQueries({ queryKey: ['user'] })
-				}
-				console.log(`Finished callback for "${event}"`, newUser)
+				// 1. decide what to do to user state and whether to clear user cache
+				const newUserValue =
+					session?.user ?
+						{
+							email: session.user.email ?? '',
+							id: session.user.id ?? '',
+							role: session.user.role ?? '',
+						}
+					:	null
+				const shouldClearCache = event === 'SIGNED_OUT' || !session?.user
+				// 2. update user state and reset cache if needed
+				// (maybe we should batch these but it doesn't seem to matter yet)
+				batch(() => {
+					setUser(newUserValue)
+					if (shouldClearCache) {
+						// uncache user data when the user logs out or changes
+						props.queryClient.resetQueries({ queryKey: ['user'] })
+					}
+					console.log(
+						`Handled auth state change: "${event}"${shouldClearCache ? ' and cleared user cache' : ''}`,
+						newUserValue
+					)
+				})
 			}
 		)
 		onCleanup(() => {
@@ -69,10 +72,9 @@ export const AuthStateProvider = (props: {
 	return (
 		<AuthContext.Provider
 			value={{
-				isAuth: createMemo(() => user.role === 'authenticated'),
-				getUid: createMemo(() => user.id ?? ''),
-				getEmail: createMemo(() => user.email ?? ''),
-				// setSession: (newSession) => setSession(newSession),
+				isAuth: () => user?.role === 'authenticated',
+				getUid: () => user?.id ?? '',
+				getEmail: () => user?.email ?? '',
 			}}
 		>
 			{props.children}
