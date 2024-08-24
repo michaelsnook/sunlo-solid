@@ -3,6 +3,7 @@ import { ParentProps, Suspense } from 'solid-js'
 import { FileRoutes } from '@solidjs/start/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/solid-query'
 import { SolidQueryDevtools } from '@tanstack/solid-query-devtools'
+import { Toaster } from 'solid-toast'
 import { Sidebar } from 'sidebar'
 import { AuthStateProvider } from 'auth-state-provider'
 import './app.css'
@@ -22,6 +23,7 @@ export default function App() {
 				</Router>
 				<SolidQueryDevtools />
 			</QueryClientProvider>
+			<Toaster position="top-center" />
 		</AuthStateProvider>
 	)
 }

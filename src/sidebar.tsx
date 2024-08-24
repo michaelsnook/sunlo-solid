@@ -7,6 +7,7 @@ import languages from 'lib/languages'
 import { lang } from 'types/main'
 import { useProfile } from 'lib/queries'
 import { useAuth } from 'auth-state-provider'
+import toast from 'solid-toast'
 
 type LinkType = { text: string; href: string }
 
@@ -43,6 +44,12 @@ export function Sidebar() {
 	const toggle = () => setIsOpen(() => !isOpen())
 
 	const profile = () => query.data ?? null
+
+	const clickSignOut = () => {
+		supabase.auth.signOut()
+		toast('Signed out')
+		// maybe redirect
+	}
 
 	return (
 		<div id="sidebar-all">
@@ -106,14 +113,7 @@ export function Sidebar() {
 
 				<Show when={!!query.data}>
 					<p>
-						<button
-							class="btn btn-ghost"
-							onClick={() => {
-								supabase.auth.signOut()
-								// then toast successful signout
-								// maybe redirect
-							}}
-						>
+						<button class="btn btn-ghost" onClick={clickSignOut}>
 							Sign out
 						</button>
 					</p>

@@ -3,6 +3,7 @@ import supabase from 'lib/supabase-client'
 import { cn } from 'lib/utils'
 import { createForm } from '@felte/solid'
 import { useQueryClient } from '@tanstack/solid-query'
+import toast from 'solid-toast'
 
 type LoginFormData = {
 	email: string
@@ -14,8 +15,9 @@ export function LoginForm() {
 
 	const { form } = createForm({
 		onSubmit: async (values: LoginFormData) => {
-			supabase.auth.signInWithPassword(values).then(res => {
-				if (res.error) console.log(`Failed to sign in`, res.error)
+			supabase.auth.signInWithPassword(values).then(response => {
+				if (response.error) console.log(`Failed to sign in`, response.error)
+				else toast.success('Logged in')
 			})
 		},
 	})
