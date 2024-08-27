@@ -1,40 +1,61 @@
-import { A } from '@solidjs/router'
+import { A, useNavigate } from '@solidjs/router'
 import supabase from 'lib/supabase-client'
 import { cn } from 'lib/utils'
 import { createForm } from '@felte/solid'
-import { useQueryClient } from '@tanstack/solid-query'
 import toast from 'solid-toast'
+import ShowError from 'components/show-error'
+import {
+	createMutation,
+	CreateMutationOptions,
+	MutationKey,
+} from '@tanstack/solid-query'
+import { AuthError } from '@supabase/supabase-js'
 
 type LoginFormData = {
 	email: string
 	password: string
 }
 
+const key: MutationKey = ['login']
+
 export function LoginForm() {
-	const queryClient = useQueryClient()
+	const navigate = useNavigate()
+	const login = createMutation<any, AuthError>(() => ({
+		mutationKey: key,
+		mutationFn: async (formData: unknown) => {
+			const { data, error } = await supabase.auth.signInWithPassword(
+				formData as LoginFormData
+			)
+			if (error) {
+				console.log(`Failed to sign in`, error)
+				throw error
+			}
+			return data
+		},
+		onError: error => {
+			toast.error('Error signing in')
+		},
+		onSuccess: data => {
+			toast.success('Signed in')
+			navigate('/learn')
+		},
+	}))
 
 	const { form } = createForm({
-		onSubmit: async (values: LoginFormData) => {
-			supabase.auth.signInWithPassword(values).then(response => {
-				if (response.error) {
-					console.log(`Failed to sign in`, response.error)
-					toast.error('Error signing in')
-					throw response.error
-				} else toast.success('Logged in')
-			})
-		},
+		onSubmit: params => login.mutate(params),
 	})
-
-	const login = {
-		isPending: false,
-		error: null,
-	}
 
 	return (
 		<>
 			<h1 class="h3 text-base-content/90">Please log in</h1>
-			<form use:form role="form" class="form">
-				<fieldset class="flex flex-col gap-y-4" disabled={login.isPending}>
+			<form use:form role="form" class="form" method="post">
+				<fieldset
+					class={cn(
+						'flex flex-col gap-y-4',
+						login.isPending ? 'opacity-50' : ''
+					)}
+					disabled={login.isPending}
+				>
 					<div>
 						<label for="email">Email</label>
 						<input
@@ -70,6 +91,13 @@ export function LoginForm() {
 							placeholder="* * * * * * * *"
 						/>
 					</div>
+
+					<ShowError when={!!login.error?.status}>
+						{login.error?.status === 400 ?
+							'Invalid user name or password. (You might need to create a new account.)'
+						:	'An unknown error has occured. (sorry)'}
+					</ShowError>
+
 					<div class="flex flex-row justify-between">
 						<button
 							tabIndex={3}

@@ -40,10 +40,12 @@
 - [ ] 4. add deck detail page, language queries and deck queries
 - [ ] 4. preload the app data high up in the route tree
 
-- [ ] any: add toast for login logout
-- [ ] any: add Error and Loading states (consider suspense query?)
-    - https://docs.solidjs.com/concepts/control-flow/error-boundary
-- [ ] any: make login signout into mutations
+- [x] any: add toast for login logout
+- [x] any: add Error state
+- [ ] any: add global error boundary https://docs.solidjs.com/concepts/control-flow/error-boundary
+- [ ] any: add Pending state (consider suspense query?)
+- [x] any: make login a mutation
+- [ ] any: make signout a mutation
 - [ ] any: replace react-modal
 - [ ] any: replace react-select
 
