@@ -123,10 +123,7 @@ export function Sidebar() {
 	)
 }
 
-const SidebarOpener = ({
-	isOpen,
-	toggle,
-}: {
+const SidebarOpener = (props: {
 	isOpen: Accessor<boolean>
 	toggle: () => void
 }) => (
@@ -135,9 +132,9 @@ const SidebarOpener = ({
 		role="button"
 		aria-haspopup={true}
 		aria-label="Toggle main menu"
-		aria-expanded={isOpen()}
+		aria-expanded={props.isOpen()}
 		aria-controls="main-menu"
-		onClick={toggle}
+		onClick={props.toggle}
 		tabIndex={0}
 	>
 		<svg

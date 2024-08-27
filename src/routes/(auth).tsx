@@ -1,6 +1,6 @@
-import { JSXElement } from 'solid-js'
+import { ParentProps } from 'solid-js'
 
-export default function AuthLayout({ children }: { children: JSXElement }) {
+export default function AuthLayout(props: ParentProps) {
 	console.log(`This is an auth guard! not a very good one.`)
-	return <>{children}</>
+	return props.children
 }

@@ -1,5 +1,5 @@
-import { JSXElement } from 'solid-js'
+import { ParentProps } from 'solid-js'
 
-export default function LearnLayout({ children }: { children: JSXElement }) {
-	return <div class="w-app">{children}</div>
+export default function LearnLayout(props: ParentProps) {
+	return <div class="w-app">{props.children}</div>
 }

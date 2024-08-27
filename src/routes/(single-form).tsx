@@ -1,5 +1,5 @@
-import { JSXElement } from 'solid-js'
+import { ParentProps } from 'solid-js'
 
-export default function Layout({ children }: { children: JSXElement }) {
-	return <div class="mx-auto mt-[10cqh] w-full max-w-md">{children}</div>
+export default function Layout(props: ParentProps) {
+	return <div class="mx-auto mt-[10cqh] w-full max-w-md">{props.children}</div>
 }

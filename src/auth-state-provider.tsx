@@ -2,7 +2,7 @@ import type { uuid } from 'types/main'
 import type { QueryClient } from '@tanstack/solid-query'
 import type { Session } from '@supabase/supabase-js'
 import {
-	type JSXElement,
+	type ParentProps,
 	batch,
 	createContext,
 	onCleanup,
@@ -30,10 +30,9 @@ type AuthContextValue = {
 
 export const AuthContext = createContext<AuthContextValue>()
 
-export const AuthStateProvider = (props: {
-	queryClient: QueryClient
-	children: JSXElement
-}) => {
+export const AuthStateProvider = (
+	props: ParentProps & { queryClient: QueryClient }
+) => {
 	const [user, setUser] = createStore<SessionUser>(null)
 
 	onMount(() => {
