@@ -15,7 +15,7 @@
 - [x] 4. set up tailwind, daisy, base layout, theme
 - [x] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
     - and getting-started and /learn/new-language
-    - and layouts for single-form, auth guard, and app width
+    - and layouts for single-form, auth guard (stub), and app width
 - [x] 5. add sidebar with state / static menu
 
 
@@ -23,7 +23,7 @@
 - [ ] any: husky pre-commit -- actually defer this till we slow down
 - [x] any: tauri build (not perfect but launches apple desktop app)
 - [ ] any: tauri iOS
-- [ ] any: add 404 and 500 pages
+- [ ] any: add 404 page
 
 
 - [x] 1. add supabase client, make the login work
@@ -42,8 +42,10 @@
 
 - [x] any: add toast for login logout
 - [x] any: add Error state
-- [ ] any: add global error boundary https://docs.solidjs.com/concepts/control-flow/error-boundary
-- [ ] any: add Pending state (consider suspense query?)
+- [ ] any: add working Auth guard / redirect / url arg
+- [x] any: add global error boundary https://docs.solidjs.com/concepts/control-flow/error-boundary
+- [ ] any: add app Pending state (consider suspense query?)
+    - [ ] any: add page/navigation transition manager
 - [x] any: make login a mutation
 - [ ] any: make signout a mutation
 - [ ] any: replace react-modal
