@@ -15,7 +15,7 @@
 - [x] 4. set up tailwind, daisy, base layout, theme
 - [x] 5. add routes for `/profile`, `/learn`, `/learn/[lang]`
     - and getting-started and /learn/new-language
-    - and layouts for single-form, auth guard, and app width
+    - and layouts for single-form, auth guard (stub), and app width
 - [x] 5. add sidebar with state / static menu
 
 
@@ -44,6 +44,7 @@
 - [x] any: add Error state
 - [ ] any: add global error boundary https://docs.solidjs.com/concepts/control-flow/error-boundary
 - [ ] any: add Pending state (consider suspense query?)
+- [x] any: add page/navigation transition manager
 - [x] any: make login a mutation
 - [ ] any: make signout a mutation
 - [ ] any: replace react-modal

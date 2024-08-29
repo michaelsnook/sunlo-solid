@@ -7,6 +7,7 @@ import { Toaster } from 'solid-toast'
 import { Sidebar } from 'sidebar'
 import { AuthStateProvider } from 'auth-state-provider'
 import './app.css'
+import { PageTransition } from './page-transition-maker'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -34,7 +35,7 @@ function RootLayout(props: ParentProps) {
 			<Suspense>
 				<Sidebar />
 				<div class="mx-auto w-full max-w-[1100px] px-[1%] py-20 @container">
-					{props.children}
+					<PageTransition>{props.children}</PageTransition>
 				</div>
 			</Suspense>
 		</div>
