@@ -23,7 +23,7 @@
 - [ ] any: husky pre-commit -- actually defer this till we slow down
 - [x] any: tauri build (not perfect but launches apple desktop app)
 - [ ] any: tauri iOS
-- [ ] any: add 404 page
+- [x] any: add 404 page
 
 
 - [x] 1. add supabase client, make the login work
