@@ -1,6 +1,6 @@
 import { A } from '@solidjs/router'
 import languages from 'lib/languages'
-import { useProfile } from 'lib/queries'
+import { useProfile } from 'lib/resource-profile'
 import { For } from 'solid-js'
 import { lang } from 'types/main'
 

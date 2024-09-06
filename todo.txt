@@ -37,8 +37,10 @@
     - and added query invalidation/reset
 - [x] 3. add auth state change listener, invalidate queries
 - [x] 3. auth store/context/hook, protect user queries from loading empty data
-- [ ] 4. add deck detail page, language queries and deck queries
-- [ ] 4. preload the app data high up in the route tree
+- [x] 4. add deck detail page, hoisted deck query
+    - [x] useDeckQuery, useDeckMeta
+    - [ ] DeckPids, CardsMap, CardFull
+- [ ] 4. add language queries
 
 - [x] any: add toast for login logout
 - [x] any: add Error state

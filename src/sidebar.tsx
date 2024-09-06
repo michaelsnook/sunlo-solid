@@ -5,8 +5,7 @@ import { cn } from 'lib/utils'
 import { A } from '@solidjs/router'
 import languages from 'lib/languages'
 import { lang } from 'types/main'
-import { useProfile } from 'lib/queries'
-import { useAuth } from 'auth-state-provider'
+import { useProfile } from 'lib/resource-profile'
 import toast from 'solid-toast'
 
 type LinkType = { text: string; href: string }
@@ -38,7 +37,6 @@ const staticMenuLinks: Array<LinkType> = [
 ]
 
 export function Sidebar() {
-	const { isAuth } = useAuth()
 	const query = useProfile()
 	const [isOpen, setIsOpen] = createSignal(true)
 	const toggle = () => setIsOpen(() => !isOpen())
