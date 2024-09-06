@@ -33,15 +33,15 @@ export default function App() {
 
 function RootLayout(props: ParentProps) {
 	return (
-		<div class="flex min-h-screen flex-row bg-[hsl(210,100,15)] text-white">
-			<Suspense>
-				<Sidebar />
-				<div class="mx-auto w-full max-w-[1100px] px-[1%] py-20 @container">
+		<div class="flex min-h-screen flex-row">
+			<Sidebar />
+			<div class="mx-auto w-full max-w-[1100px] px-[1%] py-20 @container">
+				<Suspense>
 					<ErrorBoundary fallback={ErrorFallback}>
 						{props.children}
 					</ErrorBoundary>
-				</div>
-			</Suspense>
+				</Suspense>
+			</div>
 		</div>
 	)
 }
