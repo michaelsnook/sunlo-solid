@@ -1,5 +1,5 @@
 import { CardsMap, DeckFetched, DeckLoaded, DeckMeta, pids } from 'types/main'
-import supabase from './supabase-client'
+import supabase from 'lib/supabase-client'
 import { mapArray } from 'lib/utils'
 import { createQuery, type CreateQueryResult } from '@tanstack/solid-query'
 import { useAuth } from 'auth-state-provider'

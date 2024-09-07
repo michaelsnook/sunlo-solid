@@ -40,7 +40,9 @@
 - [x] 4. add deck detail page, hoisted deck query
     - [x] useDeckQuery, useDeckMeta
     - [ ] DeckPids, CardsMap, CardFull
-- [ ] 4. add language queries
+- [x] 4. add language query, fetcher, and meta selector
+    - [ ] Add pids, phrases map, card lookup
+
 
 - [x] any: add toast for login logout
 - [x] any: add Error state

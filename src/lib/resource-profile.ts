@@ -1,8 +1,8 @@
 import { PostgrestError } from '@supabase/supabase-js'
 import { createQuery, CreateQueryResult } from '@tanstack/solid-query'
 import { DeckMeta, DecksMap, lang, ProfileFull } from 'types/main'
-import supabase from './supabase-client'
-import { mapArray } from './utils'
+import supabase from 'lib/supabase-client'
+import { mapArray } from 'lib/utils'
 import { useAuth } from 'auth-state-provider'
 
 async function fetchAndShapeProfileFull() {

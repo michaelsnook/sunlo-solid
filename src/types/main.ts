@@ -30,3 +30,27 @@ export type DeckLoaded = {
 export type CardFull = CardMeta & {
 	reviews?: Array<ReviewMeta>
 }
+export type CardMeta = Tables<'user_card_plus'>
+export type ReviewMeta = Tables<'user_card_review_plus'>
+
+
+/* Un-authenticated data about Languages and Phrases */
+export type LanguageFetched = LanguageMeta & {
+  phrases: Array<PhraseFull>
+}
+export type LanguageMeta = Tables<'language_plus'>
+export type LanguageLoaded = {
+  meta: LanguageMeta
+  pids: pids
+  phrases: {
+    [key: string]: PhraseFull
+  }
+}
+export type PhraseFull = PhraseMeta & {
+  translations: Array<TranslationRow>
+}
+export type PhraseMeta = Tables<'phrase_plus'>
+export type TranslationRow = Tables<'phrase_translation'>
+export type PhrasesMap = {
+  [key: uuid]: PhraseFull
+}
