@@ -4,17 +4,17 @@ import { GarlicBroccoli } from 'components/garlic'
 export default function HomePage() {
 	return (
 		<>
-			<main class="@xl:my-20 mb-8 flex flex-row flex-wrap gap-4">
-				<div class="@xl:basis-3/5 mx-auto flex max-w-[537px] basis-11/12 flex-col justify-center space-y-4">
-					<h1 class="d2 @xl:mb-4 @xl:mt-8 @xl:text-start mt-12 text-center md:mb-10">
+			<main class="mb-8 flex flex-row flex-wrap gap-4 @xl:my-20">
+				<div class="mx-auto flex max-w-[537px] basis-11/12 flex-col justify-center space-y-4 @xl:basis-3/5">
+					<h1 class="d2 mt-12 text-center @xl:mb-4 @xl:mt-8 @xl:text-start md:mb-10">
 						Sunlo: social language&nbsp;learning
 					</h1>
-					<p class="@xl:h-[120px] @xl:text-start text-center text-xl">
+					<p class="text-center text-xl @xl:h-[120px] @xl:text-start">
 						Create your own flash cards, pick from a crowd-sourced pool, or send
 						your friend some key phrases to help them learn.
 					</p>
 				</div>
-				<div class="@xl:basis-1/3 mx-auto flex-none space-y-4 text-center">
+				<div class="mx-auto flex-none space-y-4 text-center @xl:basis-1/3">
 					<GarlicBroccoli classes="mx-auto" />
 					<a
 						tabIndex={1}
@@ -26,16 +26,16 @@ export default function HomePage() {
 				</div>
 			</main>
 
-			<div class="w-app alert text-warning border-0 bg-black/30 text-center">
+			<aside class="w-app alert border-0 bg-black/30 text-center text-warning">
 				⚠️ Sunlo is under development; it is incomplete but most of what&apos;s
 				here should work, so if you do spot a problem, please let me know! ⚠️
-			</div>
-			<section class="card bg-base-100 text-base-content @lg:px-4 @lg:pb-16 @lg:pt-10 my-16 px-1 pb-8 pt-4">
-				<h2 class="h2 @lg:pb-6 px-4 text-center">
+			</aside>
+			<section class="card my-16 bg-base-100 px-1 pb-8 pt-4 text-base-content @lg:px-4 @lg:pb-16 @lg:pt-10">
+				<h2 class="h2 px-4 text-center @lg:pb-6">
 					Our Approach to Language&nbsp;Learning
 				</h2>
-				<div class="@xl:flex-row flex flex-col justify-center gap-4">
-					<div class="card bg-base-200 basis-80 shadow-xl">
+				<div class="flex flex-col justify-center gap-4 @xl:flex-row">
+					<div class="card basis-80 bg-base-200 shadow-xl">
 						<div class="card-body">
 							<h3 class="card-title">
 								<PhraseIcon /> Phrase Based
@@ -52,7 +52,7 @@ export default function HomePage() {
 							</p>
 						</div>
 					</div>
-					<div class="card bg-base-200 basis-80 shadow-xl">
+					<div class="card basis-80 bg-base-200 shadow-xl">
 						<div class="card-body">
 							<h3 class="card-title">
 								<SocialIcon /> Social Learning
@@ -70,7 +70,7 @@ export default function HomePage() {
 							</p>
 						</div>
 					</div>
-					<div class="card bg-base-200 basis-80 shadow-xl">
+					<div class="card basis-80 bg-base-200 shadow-xl">
 						<div class="card-body">
 							<h3 class="card-title">
 								<CuriosityIcon /> Driven by Curiosity
@@ -89,9 +89,9 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
-			<section class="@lg:pt-10 my-16 pb-16 pt-4">
+			<section class="my-16 pb-16 pt-4 @lg:pt-10">
 				<h2 class="h2 px-4 pb-6 text-center">Who is Sunlo for?</h2>
-				<div class="@xl:flex-row flex flex-col justify-center gap-4">
+				<div class="flex flex-col justify-center gap-4 @xl:flex-row">
 					<div class="card basis-80 bg-black/20 shadow-xl">
 						<div class="card-body">
 							<h3 class="card-title">
@@ -157,9 +157,9 @@ export default function HomePage() {
 				</A>
 			</section>
 
-			<section class="card bg-base-100 text-base-content @lg:px-8 @lg:pt-10 my-16 px-4 pb-16 pt-4">
+			<section class="card my-16 bg-base-100 px-4 pb-16 pt-4 text-base-content @lg:px-8 @lg:pt-10">
 				<h2 class="h2 px-4 pb-6 text-center">The Story Behind Sunlo</h2>
-				<div class="@lg:columns-2 columns-1 space-y-4 text-xl/8">
+				<div class="columns-1 space-y-4 text-xl/8 @lg:columns-2">
 					<p>
 						Sunlo is a labour of love that started in 2015 when I came to India
 						and found tools like the owl app lacking. (You know the one...)
@@ -175,24 +175,24 @@ export default function HomePage() {
 						language-learning I started to feel a lack of good tools for helping
 						people learn languages that are <em>different in structure</em> from
 						the ones they&apos;re raised on. Learning{' '}
-						<span class="decoration-accent dark:decoration-warning underline decoration-[3px]">
+						<span class="underline decoration-accent decoration-[3px] dark:decoration-warning">
 							Spanish
 						</span>{' '}
 						from{' '}
-						<span class="decoration-accent dark:decoration-warning underline decoration-[3px]">
+						<span class="underline decoration-accent decoration-[3px] dark:decoration-warning">
 							English
 						</span>{' '}
 						may be straight-forward with lessons on vocabulary and grammar, but
 						the same approach might not work to learn{' '}
-						<span class="decoration-accent dark:decoration-warning underline decoration-[3px]">
+						<span class="underline decoration-accent decoration-[3px] dark:decoration-warning">
 							Arabic
 						</span>
 						,{' '}
-						<span class="decoration-accent dark:decoration-warning underline decoration-[3px]">
+						<span class="underline decoration-accent decoration-[3px] dark:decoration-warning">
 							Xhosa
 						</span>{' '}
 						or{' '}
-						<span class="decoration-accent dark:decoration-warning underline decoration-[3px]">
+						<span class="underline decoration-accent decoration-[3px] dark:decoration-warning">
 							Mandarin
 						</span>
 						, whose grammars and patterns may be too unfamiliar for me to
@@ -234,9 +234,9 @@ export default function HomePage() {
 					<p class="text-center italic">– M</p>
 				</div>
 			</section>
-			<section class="@lg:pt-10 my-16 pb-16 pt-4">
+			<section class="my-16 pb-16 pt-4 @lg:pt-10">
 				<h2 class="h2 px-4 pb-6 text-center">Sunlo is Free and Open Source</h2>
-				<div class="@lg:columns-2 @xl:columns-3 columns-1 space-y-4 text-xl/8">
+				<div class="columns-1 space-y-4 text-xl/8 @lg:columns-2 @xl:columns-3">
 					<p>
 						For now Sunlo is just me, trying to learn languages to connect with
 						the people I love. It is my humble wish that it may help others do
@@ -268,7 +268,7 @@ export default function HomePage() {
 					</p>
 				</div>
 			</section>
-			<footer class="@lg:pt-10 my-16 flex flex-row flex-wrap justify-center gap-8 pb-16 pt-4">
+			<footer class="my-16 flex flex-row flex-wrap justify-center gap-8 pb-16 pt-4 @lg:pt-10">
 				<a
 					class="btn btn-ghost"
 					href="https://github.com/michaelsnook/sunlo-nextjs"

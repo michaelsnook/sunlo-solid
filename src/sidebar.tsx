@@ -68,10 +68,10 @@ export function Sidebar() {
 					'top-0 z-30 h-screen w-72 flex-col gap-4 overflow-y-auto overflow-x-hidden bg-base-300 p-6 text-base-content'
 				)}
 			>
-				<span class="h4 flex flex-row items-center">
+				<A href="/" class="h4 flex flex-row items-center">
 					<Garlic size={50} />
 					Sunlo
-				</span>
+				</A>
 
 				<Show when={profile()}>
 					<A href="/profile" class="nav-link">

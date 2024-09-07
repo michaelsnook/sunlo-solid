@@ -7,7 +7,7 @@ import { lang } from 'types/main'
 export default function LearnIndexPage() {
 	const query = useProfile()
 	return (
-		<main class="caret-white">
+		<main>
 			<h1 class="h1">Your decks</h1>
 			<div class="flex flex-shrink flex-col flex-wrap gap-4">
 				<For each={query.data?.deckLanguages}>
