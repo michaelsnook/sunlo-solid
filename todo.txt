@@ -23,6 +23,8 @@
 - [ ] any: husky pre-commit -- actually defer this till we slow down
 - [x] any: tauri build (not perfect but launches apple desktop app)
 - [ ] any: tauri iOS
+- [ ] any: tauri android
+    consider: https://github.com/atilafassina/quantum/blob/main/package.json and tutorial https://www.youtube.com/watch?v=W539_PP4Y98
 - [x] any: add 404 page
 
 
@@ -46,7 +48,7 @@
 
 - [x] any: add toast for login logout
 - [x] any: add Error state
-- [ ] any: add working Auth guard / redirect / url arg
+- [x] any: add working Auth guard / redirect / url arg
 - [x] any: add global error boundary https://docs.solidjs.com/concepts/control-flow/error-boundary
 - [ ] any: add app Pending state (consider suspense query?)
     - [ ] any: add page/navigation transition manager
@@ -54,6 +56,7 @@
 - [ ] any: make signout a mutation
 - [ ] any: replace react-modal
 - [ ] any: replace react-select
+    consider https://corvu.dev/
 
 - [ ] 1. add new deck
 - [ ] 1. add translation

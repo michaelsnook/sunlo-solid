@@ -1,15 +1,13 @@
-import { A, useNavigate } from '@solidjs/router'
+import { A, useNavigate, useSearchParams } from '@solidjs/router'
 import supabase from 'lib/supabase-client'
 import { cn } from 'lib/utils'
 import { createForm } from '@felte/solid'
 import toast from 'solid-toast'
 import ShowError from 'components/show-error'
-import {
-	createMutation,
-	CreateMutationOptions,
-	MutationKey,
-} from '@tanstack/solid-query'
+import { createMutation, MutationKey } from '@tanstack/solid-query'
 import { AuthError } from '@supabase/supabase-js'
+import { useAuth } from 'auth-state-provider'
+import { Show } from 'solid-js'
 
 type LoginFormData = {
 	email: string
@@ -20,6 +18,9 @@ const key: MutationKey = ['login']
 
 export function LoginForm() {
 	const navigate = useNavigate()
+	const [params, _] = useSearchParams()
+	const { getEmail } = useAuth()
+
 	const login = createMutation<any, AuthError>(() => ({
 		mutationKey: key,
 		mutationFn: async (formData: unknown) => {
@@ -37,7 +38,7 @@ export function LoginForm() {
 		},
 		onSuccess: data => {
 			toast.success('Signed in')
-			navigate('/learn')
+			navigate(params.redirectedFrom || '/learn')
 		},
 	}))
 
@@ -47,6 +48,11 @@ export function LoginForm() {
 
 	return (
 		<>
+			<Show when={!!getEmail()}>
+				<p class="alert bg-info/30 text-center">
+					JFYI you are logged in as {getEmail()}
+				</p>
+			</Show>
 			<h1 class="h3 text-base-content/90">Please log in</h1>
 			<form use:form role="form" class="form" method="post">
 				<fieldset

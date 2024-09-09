@@ -20,12 +20,20 @@ type SessionUser = {
 	role: string
 } | null
 
+const noUser = {
+	email: '',
+	id: '',
+	role: '',
+}
+
 // Define the shape of our context
 // Note: we don't export the setter bc it all happens right here
+// When uninitialized, isAuth is false but the other 2 are null
+// When logged out, they will be false and 2 empty strings
 type AuthContextValue = {
 	isAuth: () => boolean
-	getUid: () => string
-	getEmail: () => string
+	getUid: () => string | null
+	getEmail: () => string | null
 }
 
 export const AuthContext = createContext<AuthContextValue>()
@@ -42,11 +50,12 @@ export const AuthStateProvider = (
 				const newUserValue =
 					session?.user ?
 						{
-							email: session.user.email ?? '',
-							id: session.user.id ?? '',
-							role: session.user.role ?? '',
+							email: session.user.email,
+							id: session.user.id,
+							role: session.user.role,
 						}
-					:	null
+					:	noUser
+
 				const shouldClearCache = event === 'SIGNED_OUT' || !session?.user
 				// 2. update user state and reset cache if needed
 				// (maybe we should batch these but it doesn't seem to matter yet)
@@ -72,8 +81,8 @@ export const AuthStateProvider = (
 		<AuthContext.Provider
 			value={{
 				isAuth: () => user?.role === 'authenticated',
-				getUid: () => user?.id ?? '',
-				getEmail: () => user?.email ?? '',
+				getUid: () => user?.id ?? null,
+				getEmail: () => user?.email ?? null,
 			}}
 		>
 			{props.children}
